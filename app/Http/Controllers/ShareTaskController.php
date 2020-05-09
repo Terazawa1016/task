@@ -17,11 +17,11 @@ class ShareTaskController extends Controller
         $tasks = $folder_id->shareTask()->get();
 
         $share_folder = $folder_id;
-        // dd($tasks);
+        // dd($share_folder);
 
         return view('share_tasks.share_task', [
             'tasks' => $tasks,
-            'share_folder' => $share_folder,
+            'share_folder' => $folder_id,
         ]);
     }
 
@@ -54,21 +54,21 @@ class ShareTaskController extends Controller
   }
 
 // タスク編集
-  public function showEditForm(Folder $folder, Task $task)
+  public function showEditForm(ShareFolder $folder_id, ShareTask $task)
   {
 
-    $this->checkRelation($folder, $task);
+    $this->checkRelation($folder_id, $task);
 
 // 編集対象のタスクデータを取得してテンプレートに渡す
-    return view('tasks/edit', [
+    return view('share_tasks.edit', [
       'task' => $task,
     ]);
   }
 
 // バリデーションの結果をテンプレートに表示
-  public function edit(Folder $folder, Task $task, EditTask $request)
+  public function edit(ShareFolder $folder_id, ShareTask $task, EditTask $request)
   {
-    $this->checkRelation($folder, $task);
+    $this->checkRelation($folder_id, $task);
 
 // 編集対象の$taskに入力値を詰めてsaveする
     $task->title = $request->title;
@@ -77,14 +77,14 @@ class ShareTaskController extends Controller
     $task->save();
 
 // $taskのタスク属する一覧ページへリダイレクト
-    return redirect()->route('tasks.index', [
-      'folder' =>$task->folder_id,
+    return redirect()->route('share_tasks.index', [
+      'folder_id' =>$task->share_folder_id,
     ]);
   }
 
-  private function checkRelation(Folder $folder, Task $task)
+  private function checkRelation(ShareFolder $folder, ShareTask $task)
   {
-    if ($folder->id !== $task->folder_id) {
+    if ($folder->id !== $task->share_folder_id) {
       abort(404);
     }
   }

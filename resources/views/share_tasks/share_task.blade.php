@@ -38,7 +38,9 @@
                     <td>{{$task->due_date}}</td>
     
             {{--ルーティングの設定を関数routeでURLを作り出している--}}
-                    {{-- <td><a href="{{route('share_tasks.edit', ['folder' => $task->folder_id, 'task' => $task->id])}}">編集</a></td> --}}
+            {{-- <a href="{{route('share_tasks.create', ['folder_id' => $share_folder->id])}}" class="btn btn-default btn-block">                     --}}
+
+                    <td><a href="{{route('share_tasks.edit', ['folder_id' => $share_folder->id, 'task' => $task->id])}}">編集</a></td>
                   </tr>
                   @endforeach
                 </tbody>

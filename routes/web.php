@@ -25,8 +25,8 @@ Route::post('/share_folders/create', 'ShareFolderController@create');
  Route::post('/{folder_id}/share_tasks/create', 'ShareTaskController@create');
 
  // タスクの編集機能
- Route::get('/{folder}/share_tasks/{task}/edit','ShareTaskController@showEditForm')->name('share_tasks.edit');
- Route::post('/{folder}/share_tasks/{task}/edit','ShareTaskController@edit');
+ Route::get('/{folder_id}/share_tasks/{task}/edit','ShareTaskController@showEditForm')->name('share_tasks.edit');
+ Route::post('/{folder_id}/share_tasks/{task}/edit','ShareTaskController@edit');
  Route::get('/{folder}/share_delete/{folders}','ShareTaskController@delete')->name('share_folders.delete');
 
 // ---------------------------------------------------------------------------
