@@ -16,6 +16,12 @@ Route::get('/', function () {     return view('welcome'); });
 
 // --------------------------------------------------------------------------
 
+Route::get('/content', 'ContentController@index')->name('content');
+Route::get('/content/create', 'ContentController@shareCreate')->name('content.create');
+Route::post('/content/create', 'ContentController@create');
+Route::get('/{folders}/content/delete','ContentController@delete')->name('content.delete');
+
+
 Route::get('/share_folders/create', 'ShareFolderController@shareCreate')->name('share_folders.create');
 Route::post('/share_folders/create', 'ShareFolderController@create');
 
@@ -64,3 +70,4 @@ Route::group(['middleware' => 'auth'], function() {
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
+
